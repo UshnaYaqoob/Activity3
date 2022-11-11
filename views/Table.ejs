@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+   <style>
+    body {
+    background-color: antiquewhite;
+    }
+.topnav {
+  
+    background-color: #e9e9e9;
+}
+    
+.topnav    .dropdown{
+display:inline-block;
+position:relative;
+}
+.topnav .dropdown button{
+border:none;
+padding:8px 16px;
+background-color:#7c5a10;
+color:white;
+transition:.3s;
+cursor:pointer;
+}
+.topnav .dropdown:hover button{
+background-color:#7c5a10;
+}
+.topnav .dropdown div{
+background-color:#fff;
+box-shadow:0 4px 8px rgba(0,0,0,0.2);
+z-index:1;
+visibility:hidden;
+position:absolute;
+min-width:100%;
+opacity:0;
+transition:.3s;
+}
+.topnav .dropdown:hover div{
+visibility:visible;
+opacity:1;
+}
+.topnav .dropdown div a{
+display:block;
+text-decoration:none;
+padding:8px;
+color:#000;
+transition:.1s;
+white-space:nowrap;
+}
+.topnav .dropdown div a:hover{
+background-color:#7c5a10;
+color:#fff;
+}
+.topnav    .dropdown{
+display:inline-block;
+position:relative;
+}
+
+.topnav .dropdown button{
+border:none;
+padding:8px 16px;
+background-color:#7c5a10;
+color:white;
+transition:.3s;
+cursor:pointer;
+}
+
+.topnav .dropdown:hover button{
+background-color:#7c5a10;
+}
+
+.topnav .dropdown div{
+background-color:#fff;
+box-shadow:0 4px 8px rgba(0,0,0,0.2);
+z-index:1;
+visibility:hidden;
+position:absolute;
+min-width:100%;
+opacity:0;
+transition:.3s;
+}
+
+.topnav .dropdown:hover div{
+visibility:visible;
+opacity:1;
+}
+
+.topnav .dropdown div a{
+display:block;
+text-decoration:none;
+padding:8px;
+color:#000;
+transition:.1s;
+white-space:nowrap;
+}
+
+.topnav .dropdown div a:hover{
+background-color:#7c5a10;
+color:#fff;
+}
+h1 {
+    text-align: center;
+}
+table, th, td {
+  border: 1px solid black;
+}
+table {
+    justify-content: center;
+  table-layout: fixed ;
+  width: 100% ;
+}
+td {
+  width: 25% ;
+}
+.main{
+    margin-left:100px ;
+    margin-right:100px ;
+   
+}
+   </style>
+    <title>View </title>
+    
+</head>
+
+<body>
+ 
+   
+    <div class="topnav">
+     
+        <strong>Filters : </strong> 
+        <div class="dropdown">
+            <button>Sorting</button>
+            <div>
+              <a href="/product/Sorting/ASC/<%=+CurrentPage%>">Ascending</a>
+              <a href="/product/Sorting/DESC/<%=+CurrentPage%>">Descending</a>
+            </div>
+          </div> 
+
+          <div class="dropdown">
+            <button>Category </button>
+            <div>
+              <a href="/product/description/Fist Food/<%=+CurrentPage%>">Fist Food</a>
+              <a href="/product/description/Dog Food/<%=+CurrentPage%>">Dog Food</a>
+              <a href="/product/description/Cat Food/<%=+CurrentPage%>">Cat Food</a>
+            
+            </div>
+          </div> 
+          <strong>  Views : </strong> 
+          <div class="dropdown">
+            <button>Views</button>
+            <div>
+              <a href="/horizontal">Vertical</a>
+              <a href="/Table">Table</a>
+            </div>
+          </div> 
+    </div>
+   
+    <h1>Pet World</h1>
+    <hr>
+    <div class="main">
+        <% data.forEach(function(item){ %>
+            <div class="table">
+            <table >
+                <thead>
+                    <th>PID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>price</th>
+                    <th>image</th>
+                    <th>operations</th>
+                </thead>
+                <tbody>
+                    <td>
+                        <%= item.PID %>
+                    </td>
+                    <td>
+                        <%= item.Name %>
+                    </td>
+                    <td>
+                        <%= item.Description %>
+                    </td>
+                    <td>
+                        <%= item.price %> 
+                    </td>
+                    <td>
+                        <img src="/images/<%= item.img %>" alt="Profile Picture Not Found"
+                        style="height: 100px; width: 100px;">
+                    </td>
+                    <td>
+                        <a href="/update/<%= item.user_id %>" class="btn btn-primary">Edit</a>
+                        <a href="/view/<%= item.user_id %>" class="btn btn-danger">Delete</a>
+                    </td>
+                </tbody>
+            </table>
+        </div>
+            <% }); %>
+
+    </div>
+  <a href="/add %>" class="btn btn-success" style="margin-left: 600px; width: 150px ; height: 60px;" >Add</a>
+    <div class="container mt-3 d-flex justify-content-cente">
+        <ul class="pagination">
+
+            <% if(CurrentPage==1) {%>
+                <li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+                <% } else {%>
+                    <li class="page-item"><a class="page-link" href="/Table/?page=<%=CurrentPage-1%>">Previous</a></li>
+                    <% } %>
+
+                        <% for(let i=1; i<=pages; i++){ %>
+                            <% if(i==CurrentPage){ %>
+                                <li class="page-item active"><a class="page-link" href="/Table/?page=<%=i%>">
+                                        <%=i%>
+                                    </a></li>
+                                <% } else {%>
+                                    <li class="page-item"><a class="page-link" href="/Table/?page=<%=i%>">
+                                            <%=i%>
+                                        </a></li>
+                                    <% } %>
+                                        <% } %>
+
+                                            <% if(CurrentPage==lastPage) {%>
+                                                <li class="page-item disabled"><a class="page-link" href="">Next</a>
+                                                </li>
+                                                <% } else {%>
+                                                    <li class="page-item "><a class="page-link"
+                                                            href="/Table/?page=<%=+CurrentPage+1%>">Next</a></li>
+                                                    <% } %>
+        </ul>
+    </div>
+</body>
+
+</html>

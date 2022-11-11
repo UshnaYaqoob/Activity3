@@ -1,0 +1,73 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+
+}
+body{
+    text-align: center;
+  
+        background-color: rgba(129, 75, 28, 0.986);
+      
+}
+
+
+
+.container{
+
+    width:500px;
+    padding: 30px;
+  background-color: #f0eada;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    margin-left: 30%;
+}
+.container form .header
+{
+  text-align: center;
+}
+.container form .inputs 
+{
+   margin: 10px 0;
+}
+.container form .inputs span
+{
+    text-align: left;
+    margin-left: 60px;
+    padding-bottom: 10px;
+    display: block;
+}
+.container form .inputs input {
+    width: 75%;
+    height: 35px;
+}
+.container form .inputs input:focus{
+    background-color:rgb(236, 236, 234);
+}
+.container form .inputs input:hover{
+    background-color:rgb(236, 236, 234);
+}
+input{
+padding: 10px;
+font-size: 15px;
+}
+
+input[type = "submit"],
+input[type = "reset"]{
+    padding: 10px;
+    width: 10rem;
+    margin-top: 10px;
+    
+   border-radius: 5px;
+   border-style: none;
+}
+input[type = "submit"]:hover,
+input[type = "reset"]:hover{
+   background-color: #ccbe96;
+   
+}
+
+.container form .inputs select {
+    width: 75%;
+    height: 35px;
+}

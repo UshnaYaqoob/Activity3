@@ -1,0 +1,50 @@
+
+  /* Full-width inputs */
+  input[type=text], input[type=password] {
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+  
+    border: 1px solid #ccc;
+
+  }
+ 
+  .container
+  {
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: #f0eada;
+    padding: 40px;
+  }
+  /* Set a style for all buttons */
+  button {
+ text-align: center;
+    background-color: #a08b51;
+    color: white;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+  }
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 0.8;
+  }
+  .signup_link a:hover{
+    text-decoration: underline;
+  }
+  body{
+    
+    background-color: rgba(129, 75, 28, 0.986);
+  }
+  .hy
+{
+  text-align: center;
+}
+ 
+  
+  

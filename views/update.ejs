@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Products</title>
+    <link rel="stylesheet" href="/css/add.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <form id="form" action="/update/<%= data[0].pid%>" method="post" enctype="multipart/form-data">
+
+            <Div class="header">
+                <h1>Edit Product</h1>
+            </Div>
+            <div class="inputs">
+
+                <span>Product ID:</span>
+                <input type="text" placeholder="00-0000" id="User_id" name="pid" value="<%= data[0].pid%>">
+                <span>Product Name:</span>
+                <input type="text" placeholder=" abc" id="pid" name="Name" value="<%=data[0].Name%>">
+                <span>Category:</span>
+                <input type="text"  id="des" name="Description"value="<%=data[0].Description%>">
+                <span>Price:</span>
+                <input type="number" placeholder="Rs" id="price" name="price" value="<%=data[0].price%>">
+                <span>Add Picture:</span>
+                <input type="file" placeholder="XYZ" id="img" name="img">
+            </div>
+            <input type="submit" value="submit" name="submit">
+            <input type="reset" value="Reset">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
