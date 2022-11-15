@@ -1,8 +1,11 @@
 const express= require('express');
 const router = express.Router();
 const mysql = require("mysql");
+const Auth = require("../middlewares/Auth.js");
 const bodyParser = require("body-parser");//when you submit form and sending encrypted data and you want to retrieve data from that encrypted form for this we use body parser,e.g post method
 const multer = require("multer");//
+const cookieParser = require("cookie-parser");
+const session = require('express-session');
 //const pdf=require("html-pdf");
 //const fs =require("fs");
 //const { application } = require('express');
@@ -22,6 +25,15 @@ const connection = mysql.createConnection({
     password: "",
     database: "web_programming"
 });
+	
+router.use(
+    session({
+        secret: "Web ki assignment",
+        resave: false,
+        saveUninitialized: true,
+        cookie: { path: "/", httpOnly: true, secure: false, maxAge: 1 * 60 * 60 * 1000 },//session will expire after 1 hour
+    })
+);
 
 connection.connect(function (err) {
     if (err) {
@@ -39,15 +51,37 @@ router.get("/SignIn", (req, res) => { res.render("SignIn"); });
 
 router.post("/SignIn", (req, res) => {
 
-    const UserName = req.body.username;
-    const Password = req.body.password;
+    const UserName = req.body.uname;
+    const Password = req.body.psw;
+    const Role = req.body.role;
 
+    let TableName = "";
+    Role == "admin" ? TableName = "ADMIN" : TableName = "USER";
 
-    const Query = `SELECT UserName, Password FROM users WHERE UserName = '${UserName}' AND Password = '${Password}'`;
-    connection.query(Query, function (err, result) {
+    console.log(Role, " ", UserName, " ", Password, " ", TableName);
+
+    const Query = `SELECT UserName, Password FROM ${TableName} WHERE UserName = '${UserName}' AND Password = '${Password}'`;
+    connection.query(Query, function (err, result, fields) {
         if (err) throw err;
-            res.redirect("product");
-    
+        if (result.length > 0) {
+
+            if (Role == "admin") {
+                const admin = { username: UserName, password: Password };
+                req.session.admin = admin;
+                res.cookie("CurrentRole", "Admin");
+                res.redirect("/product");
+            }
+            else if (Role == "user") {
+                const user = { username: UserName, password: Password };
+                req.session.user = user;
+                res.cookie("CurrentRole", "User");
+                res.redirect("/userView");
+            }
+
+        }
+        else {
+            res.send("Invalid Name or password");
+        }
     })
 });
 
@@ -79,9 +113,9 @@ router.post('/signup', (req, res) => {
     })
 });*/
 
-router.get("/add", (req, res) => { res.render("add"); });
+router.get("/add",Auth ,(req, res) => { res.render("add"); });
 //saving data in database
-router.post('/add', upload.single("img"), (req, res) => {
+router.post('/add',Auth, upload.single("img"), (req, res) => {
 
     if (!req.file) {
         return req.statusCode(404).send("No File Recieved!");
@@ -100,7 +134,7 @@ router.post('/add', upload.single("img"), (req, res) => {
 });
 
 //deleting from database
-router.get("/product/:id", (req, res) => {
+router.get("/product/:id",Auth, (req, res) => {
     const id = req.params.id;
     const Query = `DELETE FROM PRODUCTS WHERE pid = '${id}'`;
     connection.query(Query, function (err, result) {
@@ -109,7 +143,7 @@ router.get("/product/:id", (req, res) => {
     })
 });
 
-router.get("/update/:id", (req, res) => {
+router.get("/update/:id",Auth, (req, res) => {
     const id = req.params.id;
     const Query = `SELECT * from Products WHERE pid = '${id}'`;
     connection.query(Query, function (err, result) {
@@ -118,7 +152,7 @@ router.get("/update/:id", (req, res) => {
     })
 });
 
-router.post("/update/:id", upload.single("img"), (req, res) => { 
+router.post("/update/:id",Auth, upload.single("img"), (req, res) => { 
     if (!req.file) {
         return req.statusCode(404).send("No File Recieved!");
     }
@@ -136,7 +170,7 @@ router.post("/update/:id", upload.single("img"), (req, res) => {
     }) 
 });
 //fetching details from database to show user
-router.get("/product", (req, res) => {
+router.get("/product",Auth, (req, res) => {
     const dataCountQuery = "SELECT COUNT(*) FROM products";
     connection.query(dataCountQuery, function(err,result){
         if(err) throw err;
@@ -303,6 +337,34 @@ router.get("/product/Sorting/:sorting/:page", (req, res) => {
         })
     })
 });
+router.get("/userview", (req, res) => {
+    const dataCountQuery = "SELECT COUNT(*) FROM products";
+    connection.query(dataCountQuery, function(err,result){
+        if(err) throw err;
+
+        let dataCount = result[0]["COUNT(*)"];
+        let pageNo = req.query.page ? req.query.page : 1;
+        let dataPerPages = req.query.data ? req.query.data : 4;
+        let startLimit = (pageNo - 1) * dataPerPages;
+        let totalPages = Math.ceil(dataCount/dataPerPages);
+
+        
+        const Query = `SELECT * FROM products LIMIT ${startLimit}, ${dataPerPages}`;
+        connection.query(Query, function(err,result){
+            if(err) throw err;
+            // res.send(result);
+            res.render( "userview", 
+                 {
+                    data: result,
+                    pages: totalPages,
+                    CurrentPage: pageNo,
+                    lastPage: totalPages
+                 }
+            );
+        })
+    });
+});
+
 module.exports = router;
 /*router.printdata=(req,res)=>{
     let selectquery="select * from products ";

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>View </title>
+    <style>
+        body {
+            background-color: antiquewhite;
+        }
+
+        .topnav {
+           
+            background-color: #e9e9e9;
+        }
+
+        .topnav a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .topnav .search-container {
+            float: right;
+        }
+
+        .topnav input[type=text] {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+        }
+
+        .topnav .search-container button {
+            float: right;
+            padding: 6px;
+            margin-top: 8px;
+            margin-right: 16px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .topnav .search-container button:hover {
+            background: #ccc;
+        }
+
+        @media screen and (max-width: 600px) {
+            .topnav .search-container {
+                float: none;
+            }
+
+            .topnav a,
+            .topnav input[type=text],
+            .topnav .search-container button {
+                float: none;
+                display: block;
+                text-align: left;
+                width: 100%;
+                margin: 0;
+                padding: 14px;
+            }
+
+            .topnav input[type=text] {
+                border: 1px solid #ccc;
+            }
+        }
+        .topnav    .dropdown{
+display:inline-block;
+position:relative;
+}
+
+.topnav .dropdown button{
+border:none;
+padding:8px 16px;
+background-color:#2196F3;
+color:white;
+transition:.3s;
+cursor:pointer;
+}
+
+.topnav .dropdown:hover button{
+background-color:#2196F3;
+}
+
+.topnav .dropdown div{
+background-color:#fff;
+box-shadow:0 4px 8px rgba(0,0,0,0.2);
+z-index:1;
+visibility:hidden;
+position:absolute;
+min-width:100%;
+opacity:0;
+transition:.3s;
+}
+
+.topnav .dropdown:hover div{
+visibility:visible;
+opacity:1;
+}
+
+.topnav .dropdown div a{
+display:block;
+text-decoration:none;
+padding:8px;
+color:#000;
+transition:.1s;
+white-space:nowrap;
+}
+
+.topnav .dropdown div a:hover{
+background-color:#2196F3;
+color:#fff;
+}
+
+        h1 {
+            text-align: center;
+        }
+
+        .image {
+            height: 55%;
+        }
+
+        .card {
+            height: 400px;
+            width: 230px;
+            margin: 20px;
+            margin-left: 80px;
+            display: inline-block;
+            background-color: white;
+        }
+
+        .container {
+            padding: 2px 16px;
+            height: 45%;
+        }
+
+        .main{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+     
+      .animated-text {
+        background-image: -webkit-linear-gradient(DarkSalmon 50%, LightYellow 50%);
+        background-size: 100% 50px;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        -webkit-animation: stripes 2s linear infinite;
+        animation: stripes 2s linear infinite;
+        font-size: 50px;
+      }
+      @-webkit-keyframes stripes {
+        100% {
+          background-position: 0 -50px;
+        }
+      }
+      @keyframes stripes {
+        100% {
+          background-position: 0 -50px;
+        }
+      }
+  
+    </style>
+</head>
+<body>
+    <div class="topnav">
+        <strong>Filters : </strong> 
+        <div class="dropdown">
+            <button>Sorting</button>
+            <div>
+              <a href="/product/Sorting/ASC/<%=+CurrentPage%>">Ascending</a>
+              <a href="/product/Sorting/DESC/<%=+CurrentPage%>">Descending</a>
+            </div>
+          </div> 
+
+          <div class="dropdown">
+            <button>Category </button>
+            <div>
+              <a href="/product/description/Fist Food/<%=+CurrentPage%>">Fist Food</a>
+              <a href="/product/description/Dog Food/<%=+CurrentPage%>">Dog Food</a>
+              <a href="/product/description/Cat Food/<%=+CurrentPage%>">Cat Food</a>
+            
+            </div>
+          </div> 
+          <strong>  Views : </strong> 
+          <div class="dropdown">
+            <button>Views</button>
+            <div>
+              <a href="/horizontal">Vertical</a>
+              <a href="/Table">Table</a>
+            </div>
+          </div> 
+
+        <div class="search-container">
+            <form action="/search" method="post">
+                <input type="text" placeholder="Search.." name="sname">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+   
+ 
+    <a class="navbar-brand" href="#">
+      
+     
+    <span class="animated-text">
+        Pets World
+    </span>
+    </a>
+    <hr>
+
+    <div class="main">
+        <% data.forEach(function(item){ %>
+            <div class="card">
+                <div class="image">
+                    <img src="/images/<%= item.img %>" alt="Profile Picture Not Found"
+                        style="height: 100%; width: 100%;">
+                </div>
+                <div class="container">
+                    <h6>
+                        <span>Product Id :</span>
+                        <%= item.pid %>
+                    </h6>
+                    <h6>
+                        <span>Name :</span>
+                        <%= item.Name %>
+                    </h6>
+                    <h6>
+                        <span>Price :</span>
+                        <%= item.price %> <span> Rs. </span>
+                    </h6>
+                    <h6>
+                        <span>Category :</span>
+                        <%= item.Description %> 
+                    </h6>
+
+                    
+                </div>
+            </div>
+            <% }); %>
+    </div>
+  
+    <div class="container mt-3 d-flex justify-content-cente">
+        <ul class="pagination">
+
+            <% if(CurrentPage==1) {%>
+                <li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+                <% } else {%>
+                    <li class="page-item"><a class="page-link" href="/product/?page=<%=CurrentPage-1%>">Previous</a></li>
+                    <% } %>
+
+                        <% for(let i=1; i<=pages; i++){ %>
+                            <% if(i==CurrentPage){ %>
+                                <li class="page-item active"><a class="page-link" href="/product/?page=<%=i%>">
+                                        <%=i%>
+                                    </a></li>
+                                <% } else {%>
+                                    <li class="page-item"><a class="page-link" href="/product/?page=<%=i%>">
+                                            <%=i%>
+                                        </a></li>
+                                    <% } %>
+                                        <% } %>
+
+                                            <% if(CurrentPage==lastPage) {%>
+                                                <li class="page-item disabled"><a class="page-link" href="">Next</a>
+                                                </li>
+                                                <% } else {%>
+                                                    <li class="page-item "><a class="page-link"
+                                                            href="/product/?page=<%=+CurrentPage+1%>">Next</a></li>
+                                                    <% } %>
+        </ul>
+    </div>
+</body>
+</html>
