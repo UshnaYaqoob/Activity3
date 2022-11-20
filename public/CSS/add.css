@@ -14,7 +14,7 @@ body{
 
 
 .container{
-
+    border-radius: 10%;
     width:500px;
     padding: 30px;
   background-color: #f0eada;

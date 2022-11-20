@@ -24,10 +24,11 @@ body{
   {
     margin-left: 400px;
     margin-right: 400px;
-    margin-top: 100px;
+  
     margin-bottom: 100px;
     background-color:  #f0eada;
     padding: 40px;
+    border-radius: 20%;
   }
   /* Set a style for all buttons */
   button {

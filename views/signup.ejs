@@ -8,10 +8,35 @@
   <title>Sign in</title>
   <link rel="stylesheet" href="/CSS/signup.css">
 </head>
-
+<style>
+  .animated-text {
+       background-image: -webkit-linear-gradient(DarkSalmon 50%, LightYellow 50%);
+       background-size: 100% 50px;
+       -webkit-text-fill-color: transparent;
+       -webkit-background-clip: text;
+       -webkit-animation: stripes 2s linear infinite;
+       animation: stripes 2s linear infinite;
+       font-size: 50px;
+     }
+     @-webkit-keyframes stripes {
+       100% {
+         background-position: 0 -50px;
+       }
+     }
+     @keyframes stripes {
+       100% {
+         background-position: 0 -50px;
+       }
+     }
+</style>
 <body>
-
-  <form action="/signup" method="post">
+  <marquee behavior="scroll" direction="left">
+    <span class="animated-text">
+      Pets World
+  </span>
+    </marquee> 
+    <hr>
+  <form action="/signUp" method="post">
 
 
     <div class="container">
@@ -37,7 +62,7 @@
       <br>
       <hr>
       <div class="signup_link">
-        Not a member? <a href="/SignIn">Sign In</a>
+        Not a member? <a href="/signIn">Sign In</a>
       </div>
     </div>
 

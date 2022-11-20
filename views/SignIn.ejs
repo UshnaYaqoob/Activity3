@@ -30,17 +30,17 @@
 </head>
 <body>
  
-    
-  <form action="/SignIn" method="post" >
+  <marquee behavior="scroll" direction="left">
+    <span class="animated-text">
+      Pets World
+  </span>
 
-    <div class="container">
-      <marquee behavior="scroll" direction="left">
-        <span class="animated-text">
-          Pets World
-      </span>
-        </marquee>
-      <h1 class="hy">Sign In</h1>
-     
+
+    </marquee> 
+    <hr>
+  <form action="/signIn" method="post" >
+    <div class="container">      
+      <h1 class="hy">Sign In</h1>     
       <hr>
       <label for="uname"><b>Username</b></label>
       <input type="text" placeholder="Enter Username" name="uname" required>
@@ -54,6 +54,10 @@
         <input type='radio' name='role' value='user'><Span id="role1">User</Span> <br>
     </div>
     <br>
+    <div class="updatePassword">
+      Forget Password? <a href="/changerequest">Change Your Password</a>
+    </div>
+    <br>
       <button type="submit">Login</button>
       <br>
 
@@ -64,7 +68,7 @@
       <br>
       <hr>
       <div class="signup_link">
-        Not a member? <a href="/signup">Signup</a>
+        Not a member? <a href="/signUp">Signup</a>
       </div>
     </div>
   

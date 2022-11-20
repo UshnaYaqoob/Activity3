@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in</title>
+  <link rel="stylesheet" href="/CSS/signup.css">
+</head>
+<style>
+  .animated-text {
+       background-image: -webkit-linear-gradient(DarkSalmon 50%, LightYellow 50%);
+       background-size: 100% 50px;
+       -webkit-text-fill-color: transparent;
+       -webkit-background-clip: text;
+       -webkit-animation: stripes 2s linear infinite;
+       animation: stripes 2s linear infinite;
+       font-size: 50px;
+     }
+     @-webkit-keyframes stripes {
+       100% {
+         background-position: 0 -50px;
+       }
+     }
+     @keyframes stripes {
+       100% {
+         background-position: 0 -50px;
+       }
+     }
+</style>
+<body>
+  <marquee behavior="scroll" direction="left">
+    <span class="animated-text">
+      Pets World
+  </span>
+    </marquee> 
+  <form action="/changerequest" method="post">
+
+
+    <div class="container">
+      <h1>Password Change Request </h1>
+    
+
+      <label for="email"><b>    Email</b></label>
+  
+      <input type="email" placeholder="email" name="email" >
+      <br>
+
+     
+   
+      <button type="submit">Send Request</button>
+      <br>
+</div>
+
+
+  </form>
+
+</body>
+
+</html>
